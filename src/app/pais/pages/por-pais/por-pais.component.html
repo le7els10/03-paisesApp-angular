@@ -11,6 +11,16 @@
   </div>
 </div>
 
+<ul class="list-group">
+  <li
+    class="list-group-item list-group-item-action"
+    *ngFor="let pais of paisesSuggests"
+    [routerLink]="['/pais', pais.alpha2Code]"
+  >
+    {{ pais.name }}
+  </li>
+</ul>
+
 <hr />
 
 <div *ngIf="hasError" class="alert alert-danger">

@@ -11,6 +11,7 @@ export class PorPaisComponent {
   termino: string = '';
   hasError: boolean = false;
   paises: Country[] = [];
+  paisesSuggests: Country[] = [];
 
   constructor(private paisService: PaisService) {}
 
@@ -21,8 +22,6 @@ export class PorPaisComponent {
 
     this.paisService.searchCountry(this.termino).subscribe(
       (paises) => {
-        console.log(paises);
-
         this.paises = paises;
       },
       (err) => {
@@ -32,7 +31,13 @@ export class PorPaisComponent {
     );
   };
 
-  suggests = (event: any) => {
-    console.log('here');
+  suggests = (termino: string) => {
+    console.log(termino);
+
+    this.paisService.searchCountry(termino).subscribe((paises) => {
+      console.log(paises);
+
+      this.paisesSuggests = paises.splice(0, 5);
+    });
   };
 }
